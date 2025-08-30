@@ -29,6 +29,18 @@ pyinstaller --onefile --name valcortex-api start_api.py
 
 ไฟล์จะอ่านค่าคอนฟิกจากตัวแปรแวดล้อมหรือไฟล์ `.env` ในไดเรกทอรีเดียวกัน
 
+### API + Ollama ในไฟล์เดียว
+
+หากต้องการไฟล์ปฏิบัติการที่เปิดทั้ง `ollama serve` และ API ให้ใช้สคริปต์ `standalone.py`:
+
+```powershell
+cd cortex
+pyinstaller --onefile --add-binary "ollama.exe;." --name valcortex-all standalone.py
+\.\dist\valcortex-all.exe
+```
+
+โปรแกรมจะเรียก `ollama serve` โดยใช้โมเดลจาก `G:\models` เป็นค่าเริ่มต้น (เปลี่ยนได้ผ่านตัวแปรแวดล้อม `OLLAMA_MODELS`).
+
 ## Embedded local model
 
 มีตัวอย่างโปรเจ็กต์ `local_model/` สำหรับรันหรือฝังโมเดล `.gguf` ด้วย Python:

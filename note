@@ -68,3 +68,16 @@ cd E:\08-04-2023-HOSTSHARE\htm_go\ValCortex
 docker compose down
 docker compose up -d --build
 curl http://localhost:8088/health
+
+
+wget "https://repo.anaconda.com/miniconda/Miniconda3-latest-Windows-x86_64.exe" -OutFile "G:\ai\Miniconda3-latest-Windows-x86_64.exe"
+
+$c=@("$env:USERPROFILE\miniconda3","C:\ProgramData\Miniconda3","$env:USERPROFILE\anaconda3","C:\ProgramData\Anaconda3");foreach($p in $c){if(Test-Path "$p\condabin\conda.bat"){ $env:Path="$env:Path;$p\condabin"; & "$p\condabin\conda.bat" init powershell | Out-Null; & "$p\condabin\conda.bat" init cmd.exe | Out-Null; Write-Host "Initialized from $p"; break }}
+
+conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/main
+conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r
+conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/msys2
+
+conda create -n valcortex -c conda-forge python=3.10 -y
+
+

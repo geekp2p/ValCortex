@@ -92,12 +92,40 @@ cd dist
 
 ---
 
-## 5. Notes
+## 5. Build Standalone Binary (API + Ollama)
 
-- `valcortex-api.exe` → ให้บริการ HTTP API (สำหรับเชื่อมต่อภายนอก)  
-- `local-model.exe` → โหลดโมเดล `.gguf` ที่ฝังไว้ภายใน binary  
-- หากใช้ Ollama → ตรวจสอบว่า Ollama service ทำงานอยู่ และตั้งค่า `OLLAMA_MODELS=G:\models`  
-- แนะนำให้ทดสอบโมเดลใน [LM Studio](https://lmstudio.ai) หรือ [llama.cpp](https://github.com/ggerganov/llama.cpp) ได้เช่นกัน  
+```powershell
+cd G:\ai\ValCortex\cortex
+conda activate valcortex
+# ดาวน์โหลด ollama.exe มาวางไว้ในโฟลเดอร์เดียวกัน (ถ้ายังไม่มี)
+curl.exe -L "https://github.com/jmorganca/ollama/releases/latest/download/ollama-windows-amd64.exe" -o ollama.exe && pyinstaller --onefile --add-binary "ollama.exe;." --name valcortex-all standalone.py
+
+cd G:\ai\ValCortex\cortex
+curl.exe -L "https://github.com/jmorganca/ollama/releases/latest/download/ollama-windows-amd64.exe" -o ollama.exe
+pyinstaller --onefile --add-binary "ollama.exe;." --name valcortex-all standalone.py
+
+curl.exe -L "https://github.com/jmorganca/ollama/releases/latest/download/ollama-windows-amd64.exe" -o cortex\ollama.exe
+pyinstaller --onefile --add-binary "cortex\ollama.exe;." --name valcortex-all cortex\standalone.py
+
+
+
+```
+
+### รันทดสอบ
+```powershell
+cd dist
+.\valcortex-all.exe
+```
+
+---
+
+## 6. Notes
+
+- `valcortex-api.exe` → ให้บริการ HTTP API (สำหรับเชื่อมต่อภายนอก)
+- `local-model.exe` → โหลดโมเดล `.gguf` ที่ฝังไว้ภายใน binary
+- `valcortex-all.exe` → เปิดบริการ Ollama และ API ในโปรแกรมเดียว
+- หากใช้ Ollama → ตรวจสอบว่า Ollama service ทำงานอยู่ และตั้งค่า `OLLAMA_MODELS=G:\models`
+- แนะนำให้ทดสอบโมเดลใน [LM Studio](https://lmstudio.ai) หรือ [llama.cpp](https://github.com/ggerganov/llama.cpp) ได้เช่นกัน
 
 ---
 

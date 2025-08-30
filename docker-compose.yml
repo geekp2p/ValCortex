@@ -21,40 +21,24 @@ services:
       - ollama
     restart: unless-stopped
 
-volumes:
-  ollama:
-
-# หรือว่า
-
-services:
-  ollama:
-    image: ollama/ollama:latest
-    container_name: valcortex-ollama
-    ports:
-      - "11434:11434"
-    volumes:
-      - ollama:/root/.ollama
-    environment:
-      - OLLAMA_KEEP_ALIVE=24h
-    restart: unless-stopped
-
-  cortex:
-    build: ./cortex
-    container_name: valcortex-api
-    ports:
-      - "8088:8088"
-    env_file:
-      - ./cortex/.env
-    depends_on:
-      - ollama
-    restart: unless-stopped
-
   embedded:
     build: ./local_model
     container_name: valcortex-embedded
     volumes:
       - ./models:/models
     command: ["python", "app.py", "/models/model.gguf"]
+    restart: unless-stopped
+
+  standalone:
+    build: ./cortex
+    container_name: valcortex-all
+    command: ["python", "standalone.py"]
+    ports:
+      - "8080:8080"
+    environment:
+      - OLLAMA_MODELS=/models
+    volumes:
+      - ./models:/models
     restart: unless-stopped
 
 volumes:

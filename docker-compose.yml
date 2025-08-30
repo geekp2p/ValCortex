@@ -21,5 +21,13 @@ services:
       - ollama
     restart: unless-stopped
 
+  embedded:
+    build: ./local_model
+    container_name: valcortex-embedded
+    volumes:
+      - ./models:/models
+    command: ["python", "app.py", "/models/model.gguf"]
+    restart: unless-stopped
+
 volumes:
   ollama:

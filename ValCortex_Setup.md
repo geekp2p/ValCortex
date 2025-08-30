@@ -98,10 +98,14 @@ cd dist
 cd G:\ai\ValCortex\cortex
 conda activate valcortex
 # ดาวน์โหลด ollama.exe มาวางไว้ในโฟลเดอร์เดียวกัน (ถ้ายังไม่มี)
-curl.exe -L "https://github.com/jmorganca/ollama/releases/latest/download/ollama-windows-amd64.exe" -o ollama.exe && pyinstaller --onefile --add-binary "ollama.exe;." --name valcortex-all standalone.py
+# curl.exe -L "https://github.com/jmorganca/ollama/releases/latest/download/ollama-windows-amd64.exe" -o ollama.exe && pyinstaller --onefile --add-binary "ollama.exe;." --name valcortex-all standalone.py
+
+curl.exe -L "https://github.com/ollama/ollama/releases/latest/download/ollama-windows-amd64.zip" -o ollama.zip
+then unzip
+
 
 cd G:\ai\ValCortex\cortex
-curl.exe -L "https://github.com/jmorganca/ollama/releases/latest/download/ollama-windows-amd64.exe" -o ollama.exe
+# curl.exe -L "https://github.com/jmorganca/ollama/releases/latest/download/ollama-windows-amd64.exe" -o ollama.exe
 pyinstaller --onefile --add-binary "ollama.exe;." --name valcortex-all standalone.py
 
 curl.exe -L "https://github.com/jmorganca/ollama/releases/latest/download/ollama-windows-amd64.exe" -o cortex\ollama.exe

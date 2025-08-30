@@ -1,0 +1,70 @@
+curl http://localhost:8088/health
+
+curl -s -X POST http://localhost:8088/v1/chat \
+  -H "Content-Type: application/json" \
+  -d '{"messages":[{"role":"user","content":"อธิบาย 3 ไอเดียเควสใหม่"}]}'
+
+
+curl -s -X POST http://localhost:8088/v1/vision \
+  -F "prompt=บรรยายภาพนี้เป็นภาษาไทย" \
+  -F "image=@/path/to/image.jpg;type=image/jpeg"
+
+
+// ข้อความ
+await fetch('http://localhost:8088/v1/chat', { ... })
+
+// ภาพ
+await fetch('http://localhost:8088/v1/vision', { ... })
+
+
+
+---
+
+✨ แบบนี้เราจะได้ **ValCortex** ที่ชัดเจนว่าเป็น “สมองของ PixelVal/Game8” และยังสามารถขยายไปใช้กับโปรเจ็กต์อื่น ๆ ได้  
+
+ให้ผมต่อยอดเลยไหมครับ เช่น **เพิ่ม endpoint `/v1/action`** สำหรับสั่งให้ AI ตีความ “task ของ player” (เช่น เดิน, คุย, หาของ) แล้วส่งกลับเป็น action JSON ที่เกมเอาไปใช้ได้เลย?
+
+
+cd E:\08-04-2023-HOSTSHARE\htm_go\ValCortex
+docker compose up -d --build
+
+docker compose ps
+
+curl http://localhost:8088/health
+
+ทดสอบ text chat:
+
+curl -s -X POST http://localhost:8088/v1/chat ^
+  -H "Content-Type: application/json" ^
+  -d "{\"messages\":[{\"role\":\"user\",\"content\":\"ทักทายจาก Game8\"}]}"
+
+
+ทดสอบ vision (ภาพ):
+
+curl -s -X POST http://localhost:8088/v1/vision ^
+  -F "prompt=อธิบายภาพนี้" ^
+  -F "image=@E:\path\to\image.jpg;type=image/jpeg"
+
+
+5. Integration กับ Game8
+
+ใน JS ดึง API ได้เลย:
+
+const res = await fetch('http://localhost:8088/v1/chat', {
+  method: 'POST',
+  headers: {'Content-Type':'application/json'},
+  body: JSON.stringify({ messages: [{role:'user', content: "NPC ควรทำอะไร"}] })
+});
+const data = await res.json();
+console.log(data.response.message.content);
+
+
+💡 ครั้งแรกที่เรียกใช้งานโมเดล gpt-oss:20b และ llama3.2-vision:11b
+Ollama จะ ดาวน์โหลดอัตโนมัติ ลง volume ollama: (อาจกินเวลา/เน็ตพอสมควร)
+
+คุณอยากให้ผมทำ สคริปต์ .bat (Windows) สำหรับรัน ValCortex แบบ one-click เลยไหมครับ?
+
+cd E:\08-04-2023-HOSTSHARE\htm_go\ValCortex
+docker compose down
+docker compose up -d --build
+curl http://localhost:8088/health

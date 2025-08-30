@@ -1,0 +1,42 @@
+A) สั่งดึงโมเดลล่วงหน้า (ที่ Ubuntu)
+docker exec -it valcortex-ollama ollama pull gpt-oss:20b
+docker exec -it valcortex-ollama ollama pull llama3.2-vision:11b
+
+
+ดูสถานะโมเดล:
+
+docker exec -it valcortex-ollama ollama list
+
+
+ทดสอบยิงตรงเข้า Ollama (แยกจาก API) เพื่อดู error ตรง ๆ:
+
+curl -s http://localhost:11434/api/chat -H "Content-Type: application/json" -d '{"model":"gpt-oss:20b","messages":[{"role":"user","content":"ping"}]}'
+
+
+ดู log เพื่อยืนยันสาเหตุ:
+
+docker compose logs -f cortex
+docker compose logs -f ollama
+
+B) ลองใหม่จาก Windows CMD (เครื่อง 192.168.88.253 พร้อมแล้ว)
+
+ข้อความ (บรรทัดเดียว):
+
+curl -s -X POST http://192.168.88.253:8088/v1/chat -H "Content-Type: application/json" -d "{\"messages\":[{\"role\":\"user\",\"content\":\"ทักจาก Game8\"}]}"
+
+
+รูปภาพ (แก้ path ให้ตรงไฟล์จริง):
+
+curl -s -X POST http://192.168.88.253:8088/v1/vision -F "prompt=อธิบายภาพนี้" -F "image=@C:\path\to\image.jpg;type=image/jpeg"
+
+
+
+sudo docker exec -it valcortex-ollama ollama pull gpt-oss:20b
+sudo docker exec -it valcortex-ollama ollama pull llama3.2-vision:11b
+sudo curl -s http://localhost:11434/api/tags | jq .
+sudo curl -s http://localhost:11434/api/chat -H "Content-Type: application/json" -d '{"model":"gpt-oss:20b","messages":[{"role":"user","content":"ping"}]}'
+
+
+
+sudo docker exec -it valcortex-ollama ollama pull gpt-oss:20b
+sudo docker exec -it valcortex-ollama ollama run gpt-oss:20b "hello"

@@ -1,3 +1,20 @@
+# ValCortex + vicuna-13b Setup (Windows)
+
+## 0. ดาวน์โหลดโมเดล (.gguf)
+
+แนะนำเริ่มด้วย quant Q4_K_M (สมดุลคุณภาพ/แรม)
+
+# โฟลเดอร์ปลายทาง
+```powershell
+New-Item -ItemType Directory -Force -Path G:\models | Out-Null
+```
+
+# ดาวน์โหลดไฟล์เดียว (Q4_K_M ~7.9GB)
+```powershell
+curl.exe -L "https://huggingface.co/cjpais/llava-v1.6-vicuna-13b-gguf/resolve/main/llava-v1.6-vicuna-13b.Q4_K_M.gguf?download=true" -o "G:\models\llava-v1.6-vicuna-13b.Q4_K_M.gguf"
+```
+
+
 # ValCortex + GPT-OSS-20B Setup (Windows)
 
 ## 1. ดาวน์โหลดโมเดล (.gguf)

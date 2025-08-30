@@ -1,6 +1,6 @@
 A) สั่งดึงโมเดลล่วงหน้า (ที่ Ubuntu)
 docker exec -it valcortex-ollama ollama pull gpt-oss:20b
-docker exec -it valcortex-ollama ollama pull llama3.2-vision:11b
+docker exec -it valcortex-ollama ollama pull llava:13b
 
 
 ดูสถานะโมเดล:
@@ -32,7 +32,7 @@ curl -s -X POST http://192.168.88.253:8088/v1/vision -F "prompt=อธิบา�
 
 
 sudo docker exec -it valcortex-ollama ollama pull gpt-oss:20b
-sudo docker exec -it valcortex-ollama ollama pull llama3.2-vision:11b
+sudo docker exec -it valcortex-ollama ollama pull llava:13b
 sudo curl -s http://localhost:11434/api/tags | jq .
 sudo curl -s http://localhost:11434/api/chat -H "Content-Type: application/json" -d '{"model":"gpt-oss:20b","messages":[{"role":"user","content":"ping"}]}'
 

@@ -8,7 +8,7 @@ from PIL import Image
 
 OLLAMA = os.getenv("OLLAMA_BASE_URL", "http://ollama:11434").rstrip("/")
 TEXT_MODEL = os.getenv("OLLAMA_TEXT_MODEL", "gpt-oss:20b")
-VISION_MODEL = os.getenv("OLLAMA_VISION_MODEL", "llama3.2-vision:11b")
+VISION_MODEL = os.getenv("OLLAMA_VISION_MODEL", "llava:13b")
 
 allow_origins = [x.strip() for x in os.getenv("CORS_ALLOW_ORIGINS", "*").split(",") if x.strip()]
 

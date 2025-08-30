@@ -60,6 +60,12 @@ pip install -r requirements.txt pyinstaller
 pyinstaller --onefile --name valcortex-api start_api.py
 ```
 
+set OLLAMA_BASE_URL=http://127.0.0.1:11434
+set OLLAMA_TEXT_MODEL=gpt-oss:20b
+set OLLAMA_VISION_MODEL=llava:13b
+
+
+
 ### รันทดสอบ
 ```powershell
 cd dist

@@ -23,7 +23,7 @@ cd cortex
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt pyinstaller
-pyinstaller --onefile --name valcortex-api app.py
+pyinstaller --onefile --name valcortex-api start_api.py
 ./dist/valcortex-api
 ```
 
@@ -63,7 +63,7 @@ pyinstaller --onefile \
     python -m venv .venv
     .\.venv\Scripts\activate
     pip install -r requirements.txt pyinstaller
-    pyinstaller --onefile --name valcortex-api app.py
+    pyinstaller --onefile --name valcortex-api start_api.py
     .\dist\valcortex-api.exe
     ```
 
@@ -95,7 +95,7 @@ pyinstaller --onefile \
     python3 -m venv .venv
     source .venv/bin/activate
     pip install -r requirements.txt pyinstaller
-    pyinstaller --onefile --name valcortex-api app.py
+    pyinstaller --onefile --name valcortex-api start_api.py
     ./dist/valcortex-api
     ```
 

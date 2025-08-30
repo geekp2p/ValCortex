@@ -40,7 +40,7 @@ cd G:\ai\ValCortex\cortex
 conda create -n valcortex -c conda-forge python=3.10 -y
 conda activate valcortex
 pip install -r requirements.txt pyinstaller
-pyinstaller --onefile --name valcortex-api app.py
+pyinstaller --onefile --name valcortex-api start_api.py
 ```
 
 ### รันทดสอบ

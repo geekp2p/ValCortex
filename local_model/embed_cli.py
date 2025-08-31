@@ -7,14 +7,20 @@ from pathlib import Path
 import llama_cpp
 
 
+ENV_VAR_NAME = "EMBED_CLI_MODEL"
+"""Environment variable that specifies a model path override."""
+
 CANDIDATE_NAMES = [
     "gpt-oss-20b-Q4_K_M.gguf",
     "llava-v1.6-vicuna-13b.Q4_K_M.gguf",
     "model.gguf",
 ]
 
+
 def default_model_path() -> Path:
-    env_model = os.environ.get("EMBED_CLI_MODEL")
+    """Return the first existing model path from env var or default locations."""
+
+    env_model = os.environ.get(ENV_VAR_NAME)
     if env_model:
         candidate = Path(env_model)
         if candidate.exists():
@@ -37,7 +43,7 @@ def main():
     ap.add_argument(
         "--model",
         type=Path,
-        help="path to .gguf (optional, overrides EMBED_CLI_MODEL)",
+        help=f"path to .gguf (optional, overrides {ENV_VAR_NAME})",
     )
     ap.add_argument("--prompt", type=str, default="Hello from embedded model")
     ap.add_argument("--threads", type=int, default=8)

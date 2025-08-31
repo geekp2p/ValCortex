@@ -186,3 +186,30 @@ pyinstaller --onedir --name embed-cli --add-data "G:\models\gpt-oss-20b-Q4_K_M.g
 
 pyinstaller --onefile --name local-model-text --add-data "G:\models\gpt-oss-20b-Q4_K_M.gguf;models\gpt-oss-20b-Q4_K_M.gguf" app_text.py
 pyinstaller --onefile --name local-model-vision app_vision.py
+
+
+
+pyinstaller --onedir --name local-model-text --add-data "G:\models\gpt-oss-20b-Q4_K_M.gguf;models\gpt-oss-20b-Q4_K_M.gguf" app_text.py
+
+
+
+
+
+pyinstaller --onedir --name local-model-text ^
+  --add-data "G:\models\gpt-oss-20b-Q4_K_M.gguf;models\gpt-oss-20b-Q4_K_M.gguf" ^
+  app_text.py
+รัน:
+
+cmd
+Copy code
+.\dist\local-model-text\local-model-text.exe
+คง --onefile แต่ชี้โมเดลจากภายนอก
+
+cmd
+Copy code
+pyinstaller --onefile --name local-model-text app_text.py
+รัน:
+
+cmd
+Copy code
+.\dist\local-model-text.exe --model G:\models\gpt-oss-20b-Q4_K_M.gguf

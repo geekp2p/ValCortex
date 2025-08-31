@@ -134,3 +134,55 @@ cd dist
 ---
 
 ✅ ตอนนี้คุณสามารถโหลดโมเดล, build binary และวางในตำแหน่งที่ต้องการ (`G:\models` / `G:\ai`) ได้ครบแล้ว
+
+
+
+pyinstaller --onefile --name local-model-text --add-data "G:\models\gpt-oss-20b-Q4_K_M.gguf;models\gpt-oss-20b-Q4_K_M.gguf" app_text.py
+pyinstaller --onefile --name local-model-vision app_vision.py
+pyinstaller --onefile --name embed-cli --add-data "G:\models\gpt-oss-20b-Q4_K_M.gguf;models\gpt-oss-20b-Q4_K_M.gguf" --add-data "G:\models\llava-v1.6-vicuna-13b.Q4_K_M.gguf;models\llava-v1.6-vicuna-13b.Q4_K_M.gguf" embed_cli.py
+
+
+pyinstaller --onefile --name embed-cli --add-data "G:\models\gpt-oss-20b-Q4_K_M.gguf;models\gpt-oss-20b-Q4_K_M.gguf" --add-data "G:\models\llava-v1.6-vicuna-13b.Q4_K_M.gguf;models\llava-v1.6-vicuna-13b.Q4_K_M.gguf" .\embed_cli.py
+
+
+
+pyinstaller --onedir --name embed-cli --add-data "G:\models\gpt-oss-20b-Q4_K_M.gguf;models\gpt-oss-20b-Q4_K_M.gguf" --add-data "G:\models\llava-v1.6-vicuna-13b.Q4_K_M.gguf;models\llava-v1.6-vicuna-13b.Q4_K_M.gguf" embed_cli.py
+
+
+pip install llama-cpp-python
+
+pyinstaller --onedir --name embed-cli --add-data "G:\models\gpt-oss-20b-Q4_K_M.gguf;models\gpt-oss-20b-Q4_K_M.gguf" --add-data "G:\models\llava-v1.6-vicuna-13b.Q4_K_M.gguf;models\llava-v1.6-vicuna-13b.Q4_K_M.gguf" --hidden-import=llama_cpp embed_cli.py
+
+.\dist\embed-cli\embed-cli.exe --prompt "สวัสดี โลก"
+
+python -m pip install llama-cpp-python --index-url https://abetlen.github.io/llama-cpp-python/whl/cpu --extra-index-url https://pypi.org/simple --prefer-binary
+
+python -c "import llama_cpp; print('llama_cpp version:', llama_cpp.__version__)"
+
+python -m pip install pyinstaller
+
+
+
+taskkill /f /im embed-cli.exe 2>nul
+
+rmdir /s /q dist\embed-cli
+
+pyinstaller --onedir --name embed-cli --add-data "G:\models\gpt-oss-20b-Q4_K_M.gguf;models\gpt-oss-20b-Q4_K_M.gguf" --add-data "G:\models\llava-v1.6-vicuna-13b.Q4_K_M.gguf;
+models\llava-v1.6-vicuna-13b.Q4_K_M.gguf" --hidden-import=llama_cpp embed_cli.py --noconfirm
+
+
+
+✅ pyinstaller --onedir --name embed-cli --collect-data llama_cpp --collect-binaries llama_cpp --add-data "G:\models\gpt-oss-20b-Q4_K_M.gguf;models\gpt-oss-20b-Q4_K_M.gguf" --add-data "G:\models\llava-v1.6-vicuna-13b.Q4_K_M.gguf;models\llava-v1.6-vicuna-13b.Q4_K_M.gguf" embed_cli.py --noconfirm
+✅ .\dist\embed-cli\embed-cli.exe --prompt "สวัสดี โลก"
+
+Testing
+✅ .\dist\embed-cli\embed-cli.exe --prompt "สวัสดี โลก"
+
+
+pyinstaller --onedir --name embed-cli --add-data "G:\models\gpt-oss-20b-Q4_K_M.gguf;models\gpt-oss-20b-Q4_K_M.gguf" --add-data "G:\models\llava-v1.6-vicuna-13b.Q4_K_M.gguf;models\llava-v1.6-vicuna-13b.Q4_K_M.gguf" embed_cli.py
+
+.\dist\embed-cli\embed-cli.exe --prompt "สวัสดี โลก"
+
+
+pyinstaller --onefile --name local-model-text --add-data "G:\models\gpt-oss-20b-Q4_K_M.gguf;models\gpt-oss-20b-Q4_K_M.gguf" app_text.py
+pyinstaller --onefile --name local-model-vision app_vision.py

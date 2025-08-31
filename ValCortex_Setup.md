@@ -213,3 +213,9 @@ pyinstaller --onefile --name local-model-text app_text.py
 cmd
 Copy code
 .\dist\local-model-text.exe --model G:\models\gpt-oss-20b-Q4_K_M.gguf
+
+
+
+pip install llama-cpp-python --index-url https://abetlen.github.io/llama-cpp-python/whl/cpu --extra-index-url https://pypi.org/simple --prefer-binary
+
+python -c "import struct; print(struct.calcsize('P') * 8)"

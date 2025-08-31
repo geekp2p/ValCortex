@@ -56,12 +56,23 @@ def main():
         sys.exit(1)
 
     print(f"[+] Loading model: {model_path}")
-    llm = llama_cpp.Llama(
-        model_path=str(model_path),
-        n_threads=args.threads,
-        n_ctx=args.ctx,
-        verbose=False,
-    )
+    try:
+        llm = llama_cpp.Llama(
+            model_path=str(model_path),
+            n_threads=args.threads,
+            n_ctx=args.ctx,
+            verbose=False,
+        )
+    except ValueError as e:
+        msg = str(e)
+        if "invalid type" in msg.lower() or "failed to load" in msg.lower():
+            print(f"[!] {msg}")
+            print(
+                "[!] Tip: verify checksum, re-download the model, or upgrade llama-cpp-python."
+            )
+        else:
+            print(f"[!] {msg}")
+        sys.exit(1)
     out = llm(args.prompt)
     print(out)
 
